@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode.ManualOp.oldmanuels;
+package org.firstinspires.ftc.teamcode.drive.opmode.ManualOp.oldManuals;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.drive.opmode.ManualOp.manuelHelpers.Controller;
-import org.firstinspires.ftc.teamcode.drive.opmode.ManualOp.manuelHelpers.Robot;
-import org.firstinspires.ftc.teamcode.drive.opmode.ManualOp.manuelHelpers.Slide;
+import org.firstinspires.ftc.teamcode.drive.opmode.ManualOp.manualHelpers.Controller;
+import org.firstinspires.ftc.teamcode.drive.opmode.ManualOp.manualHelpers.Robot;
+import org.firstinspires.ftc.teamcode.drive.opmode.ManualOp.manualHelpers.Slide;
 
 @Config
 @Disabled

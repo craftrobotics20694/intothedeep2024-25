@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode.ManualOp.oldmanuels;
+package org.firstinspires.ftc.teamcode.drive.opmode.ManualOp.oldManuals;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;

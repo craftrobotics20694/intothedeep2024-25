@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode;
+package org.firstinspires.ftc.teamcode.drive;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -24,7 +24,7 @@ public class advancedSlideControl {
         hardwareMap = _hardwareMap;
 
         // Do the same thing we did earlier with the drive motors, just for the slide
-        slideLeft = hardwareMap.get(DcMotorEx.class, "slideleft");
+        slideLeft = hardwareMap.get(DcMotorEx.class, "slideLeft");
         slideRight = hardwareMap.get(DcMotorEx.class, "slideRight");
         slideTop = hardwareMap.get(DcMotorEx.class, "slideTop");
 

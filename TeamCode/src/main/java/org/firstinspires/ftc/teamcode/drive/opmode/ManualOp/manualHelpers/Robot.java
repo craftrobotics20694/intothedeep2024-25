@@ -1,7 +1,5 @@
-package org.firstinspires.ftc.teamcode.drive.opmode.ManualOp.manuelHelpers;
+package org.firstinspires.ftc.teamcode.drive.opmode.ManualOp.manualHelpers;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
