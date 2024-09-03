@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.CenterStage;
 
 import static org.firstinspires.ftc.teamcode.drive.opmode.visionCenterStage.Recognizer.pixelLocation.LEFT;
@@ -77,7 +78,8 @@ public class GraemeAutoDefaultCode extends LinearOpMode  {
 
         drive = new SampleMecanumDrive(hardwareMap);
         // Set up the webcam
-    /*    WebcamName adjustCameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
+    */
+/*    WebcamName adjustCameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
         // adjustCamera was the deviceName in last years code
         // We may need to change the name adjustCamera to Webcam1
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -97,7 +99,8 @@ public class GraemeAutoDefaultCode extends LinearOpMode  {
             public void onError(int errorCode) {
                 telemetry.addData("CameraInitialization", "Camera initialization error: " + errorCode);
             }
-        });*/
+        });*//*
+
         WebcamName adjustCameraName = hardwareMap.get(WebcamName.class,"Webcam 1");
 
         webcam1 = OpenCvCameraFactory.getInstance().createWebcam(adjustCameraName);
@@ -244,3 +247,4 @@ public class GraemeAutoDefaultCode extends LinearOpMode  {
     }
 
 }
+*/

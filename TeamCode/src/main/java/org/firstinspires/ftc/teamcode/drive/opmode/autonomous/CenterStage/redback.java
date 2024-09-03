@@ -1,3 +1,4 @@
+/*
 
 package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.CenterStage;
 
@@ -21,8 +22,12 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 import java.util.Arrays;
 import java.util.List;
+
+import kotlin.Deprecated;
 
 @Autonomous(name = "redBack auto")
 @Config
@@ -189,8 +194,7 @@ public class redback extends LinearOpMode {
                 .lineToSplineHeading(redBackGate,
                         SampleMecanumDrive.getVelocityConstraint(travelSpeed,
                                 DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                        SampleMecanumDrive.getAccelerationConstraint(travelAccel)
-                )
+                        SampleMecanumDrive.getAccelerationConstraint(travelAccel))
 
                 .lineToSplineHeading(redFrontGate,
                         SampleMecanumDrive.getVelocityConstraint(travelSpeed,
@@ -200,8 +204,7 @@ public class redback extends LinearOpMode {
                 .lineToSplineHeading(listYellowDrop.get(DropPlace),
                         SampleMecanumDrive.getVelocityConstraint(travelSpeed,
                                 DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                        SampleMecanumDrive.getAccelerationConstraint(travelAccel)
-                )
+                        SampleMecanumDrive.getAccelerationConstraint(travelAccel))
 
                 .build();
         robot.followTrajectorySequence(CgoToBack);
@@ -221,3 +224,4 @@ public class redback extends LinearOpMode {
     }
 
 }
+*/

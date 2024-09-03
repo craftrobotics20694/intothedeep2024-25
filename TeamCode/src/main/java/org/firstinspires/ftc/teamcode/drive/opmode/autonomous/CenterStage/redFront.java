@@ -1,3 +1,4 @@
+/*
 
 package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.CenterStage;
 
@@ -178,3 +179,4 @@ public class redFront extends LinearOpMode  {
     }
 
 }
+*/
