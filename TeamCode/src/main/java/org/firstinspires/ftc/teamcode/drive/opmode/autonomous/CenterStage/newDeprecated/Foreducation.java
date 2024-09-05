@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.CenterStage.newDeprecated;
 
 import com.acmerobotics.dashboard.config.Config;
@@ -53,3 +54,4 @@ public class Foreducation extends LinearOpMode {
 
 
 }
+*/

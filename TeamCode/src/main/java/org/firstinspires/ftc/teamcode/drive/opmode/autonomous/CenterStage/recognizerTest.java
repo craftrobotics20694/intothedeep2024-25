@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.CenterStage;
 
 import com.acmerobotics.dashboard.config.Config;
@@ -46,3 +47,4 @@ public class recognizerTest extends LinearOpMode {
         }
     }
 }
+*/

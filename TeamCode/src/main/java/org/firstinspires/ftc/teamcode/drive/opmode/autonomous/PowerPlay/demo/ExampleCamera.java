@@ -1,5 +1,7 @@
+/*
 package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.PowerPlay.demo;
 
+*/
 /*
  * Op mode for preliminary tuning of the follower PID coefficients (located in the drive base
  * classes). The robot drives back and forth in a straight line indefinitely. Utilization of the
@@ -15,7 +17,8 @@ package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.PowerPlay.demo;
  *
  * This opmode is designed as a convenient, coarse tuning for the follower PID coefficients. It
  * is recommended that you use the FollowerPIDTuner opmode for further fine tuning.
- */
+ *//*
+
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -83,3 +86,4 @@ public class ExampleCamera extends LinearOpMode {
         }
     }
 }
+*/
