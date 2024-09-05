@@ -40,8 +40,7 @@ public class learnAuto1 extends LinearOpMode {
         Action trajectoryAction2; // We are defining it as a member of the Action class
         Action trajectoryAction3; // Here we are simply creating the variables, not yet assigning values.
 
-        // Now we get into actually trajectories
-
+        // Now we get into actually building trajectories
         trajectoryAction1 = drive.actionBuilder(drive.pose)
                 .strafeTo(new Vector2d(0,0))
                 .waitSeconds(0.5)
