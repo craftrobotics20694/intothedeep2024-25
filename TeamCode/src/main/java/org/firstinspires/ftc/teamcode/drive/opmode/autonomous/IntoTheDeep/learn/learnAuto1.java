@@ -41,7 +41,7 @@ public class learnAuto1 extends LinearOpMode {
         Action trajectoryAction3; // Here we are simply creating the variables, not yet assigning values.
 
         // Now we get into actually building trajectories
-        trajectoryAction1 = drive.actionBuilder(drive.pose)
+        trajectoryAction1 = drive.actionBuilder(drive.pose) // drive.pose is the starting position you gave the robot
                 .strafeTo(new Vector2d(0,0))
                 .waitSeconds(0.5)
                 .setTangent(Math.toRadians(180))
@@ -52,7 +52,7 @@ public class learnAuto1 extends LinearOpMode {
                 .waitSeconds(0.5)
                 .build();
 
-        trajectoryAction2 = drive.actionBuilder(new Pose2d(25, -25, Math.toRadians(90)))
+        trajectoryAction2 = drive.actionBuilder(new Pose2d(25, -25, Math.toRadians(90))) //
                 .strafeTo(new Vector2d(0,0))
                 .waitSeconds(0.5)
                 .setTangent(Math.toRadians(180))
