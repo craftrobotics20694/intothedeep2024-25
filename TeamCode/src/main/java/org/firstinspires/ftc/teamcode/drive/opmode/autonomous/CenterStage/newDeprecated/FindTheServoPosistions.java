@@ -1,4 +1,4 @@
-/*
+package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.CenterStage.newDeprecated;/*
 package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.CenterStage.newDeprecated;
 
 import com.acmerobotics.dashboard.config.Config;

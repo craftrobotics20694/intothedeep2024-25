@@ -1,4 +1,4 @@
-/*
+package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.CenterStage;/*
 package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.CenterStage;
 
 import static org.firstinspires.ftc.teamcode.drive.opmode.visionCenterStage.Recognizer.pixelLocation.LEFT;
