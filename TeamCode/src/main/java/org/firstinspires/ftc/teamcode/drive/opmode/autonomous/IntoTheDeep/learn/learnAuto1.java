@@ -42,44 +42,22 @@ public class learnAuto1 extends LinearOpMode {
 
         // Now we get into actually building trajectories
         trajectoryAction1 = drive.actionBuilder(drive.pose) // drive.pose is the starting position you gave the robot
-                .strafeTo(new Vector2d(0,0))
-                .waitSeconds(0.5)
-                .setTangent(Math.toRadians(180))
-                .lineToY(-25)
-                .setTangent(Math.toRadians(90))
-                .lineToX(25)
-                .setTangent(Math.toRadians(0))
-                .waitSeconds(0.5)
-                .build();
-
-        trajectoryAction2 = drive.actionBuilder(new Pose2d(25, -25, Math.toRadians(90))) //
-                .strafeTo(new Vector2d(0,0))
-                .waitSeconds(0.5)
-                .setTangent(Math.toRadians(180))
-                .lineToY(-25)
-                .setTangent(Math.toRadians(90))
-                .lineToX(25)
-                .setTangent(Math.toRadians(0))
-                .waitSeconds(0.5)
-                .build();
-
-        trajectoryAction3 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(0,0))
-                .waitSeconds(0.5)
-                .setTangent(Math.toRadians(180))
-                .lineToY(-25)
-                .setTangent(Math.toRadians(90))
-                .lineToX(25)
-                .setTangent(Math.toRadians(0))
-                .waitSeconds(0.5)
+                .turn(Math.toRadians(-30))
+                .strafeTo(new Vector2d(0, 35))
+                .turn(Math.toRadians(-120))
+                .strafeTo(new Vector2d(35, -35))
+                .turn(Math.toRadians(-150))
+                .strafeTo(new Vector2d(-40, 10))
+                .turn(Math.toRadians(-150))
+                .strafeTo(new Vector2d(40,10))
+                .turn(Math.toRadians(-150))
+                .strafeTo(new Vector2d(-35,-35))
+                .turn(Math.toRadians(-120))
+                .waitSeconds(0.2)
                 .build();
 
         Actions.runBlocking(
-                new SequentialAction(
-                        trajectoryAction1,
-                        trajectoryAction2,
-                        trajectoryAction3
-                )
+                trajectoryAction1
         );
     }
 }
