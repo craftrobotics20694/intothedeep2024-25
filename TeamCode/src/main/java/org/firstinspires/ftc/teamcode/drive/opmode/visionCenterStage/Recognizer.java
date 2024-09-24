@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode.visionCenterStage;
+package org.firstinspires.ftc.teamcode.drive.opmode.visionCenterStage;/*
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -75,4 +75,4 @@ public class Recognizer extends OpenCvPipeline {
         }
         //Basic if statement that just compares intensity averages and returns the section with the lowest average.
     }
-}
+}*/
