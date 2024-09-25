@@ -37,8 +37,6 @@ public class learnAuto1 extends LinearOpMode {
         // Trajectory actions are actions (will go more into these later) that create a trajectory
         // A trajectory is a path that the robot can follow.
         Action trajectoryAction1; // Defining a variable called trajectoryAction
-        Action trajectoryAction2; // We are defining it as a member of the Action class
-        Action trajectoryAction3; // Here we are simply creating the variables, not yet assigning values.
 
         // Now we get into actually building trajectories
         trajectoryAction1 = drive.actionBuilder(drive.pose) // drive.pose is the starting position you gave the robot
@@ -56,6 +54,7 @@ public class learnAuto1 extends LinearOpMode {
                 .waitSeconds(0.2)
                 .build();
 
+        // This is what runs our trajectory actions
         Actions.runBlocking(
                 trajectoryAction1
         );

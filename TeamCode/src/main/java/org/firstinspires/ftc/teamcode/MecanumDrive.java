@@ -61,14 +61,14 @@ public final class MecanumDrive {
                 RevHubOrientationOnRobot.UsbFacingDirection.UP;
 
         // drive model parameters
-        public double inPerTick = 1;
-        public double lateralInPerTick = inPerTick;
-        public double trackWidthTicks = 0;
+        public double inPerTick = ((double) 32400 / 95); // Found with ForwardPushTest
+        public double lateralInPerTick = 263.9714568306282;
+        public double trackWidthTicks = 4500;
 
         // feedforward parameters (in tick units)
-        public double kS = 0;
-        public double kV = 0;
-        public double kA = 0;
+        public double kS = 0.714341443611568;
+        public double kV = 0.0006991866150215487;
+        public double kA = 0.0009999;
 
         // path profile parameters (in inches)
         public double maxWheelVel = 50;
@@ -136,8 +136,10 @@ public final class MecanumDrive {
 
             imu = lazyImu.get();
 
-            // TODO: reverse encoders if needed
-            //   leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+            // This is where you reverse the direction of the dead wheel encoders
+            // Note that these also must be reversed in the ThreeDeadWheellocalizer class
+            rightFront.setDirection(DcMotorSimple.Direction.REVERSE); // Reverse the right dead wheel
+            leftBack.setDirection(DcMotorSimple.Direction.REVERSE); // Reverse perpendicular dead wheel
         }
 
         @Override
@@ -213,8 +215,8 @@ public final class MecanumDrive {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
 
-        // TODO: make sure your config has motors with these names (or change them)
-        //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
+        // Define your motors here
+        // Make sure you've configured your bot with these motor names
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
         leftBack = hardwareMap.get(DcMotorEx.class, "leftBack");
         rightBack = hardwareMap.get(DcMotorEx.class, "rightBack");
@@ -225,8 +227,9 @@ public final class MecanumDrive {
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        // TODO: reverse motor directions if needed
-        //   leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        // This is where you reverse your motor directions
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // TODO: make sure your config has an IMU with this name (can be BNO or BHI)
         //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
