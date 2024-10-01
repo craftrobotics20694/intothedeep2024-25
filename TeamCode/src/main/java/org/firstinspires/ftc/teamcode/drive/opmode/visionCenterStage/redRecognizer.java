@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode.visionCenterStage;
+package org.firstinspires.ftc.teamcode.drive.opmode.visionCenterStage;/*
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -75,4 +75,4 @@ public class redRecognizer extends OpenCvPipeline {
         }
         //Basic if statement that compares the average intensities of each mat and returns which had the highest
     }
-}
+}*/

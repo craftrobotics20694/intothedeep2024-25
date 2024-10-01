@@ -1,5 +1,4 @@
 package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.CenterStage;/*
-package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.CenterStage;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -8,11 +7,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.drive.opmode.visionCenterStage.redRecognizer;
+import org.firstinspires.ftc.teamcode.drive.opmode.visionIntoTheDeep.itdCameraPipeline;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
-@Disabled
 @Autonomous
 @Config
 public class redRecognizerTest extends LinearOpMode {
@@ -32,7 +31,7 @@ public class redRecognizerTest extends LinearOpMode {
         webcam1.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                webcam1.startStreaming(1280,720, OpenCvCameraRotation.UPSIDE_DOWN);
+                webcam1.startStreaming(1280,720, OpenCvCameraRotation.UPSIDE_DOWN, OpenCvWebcam.StreamFormat.MJPEG);
             }
 
             @Override
@@ -40,10 +39,7 @@ public class redRecognizerTest extends LinearOpMode {
 
             }
         });
-        while (!isStarted()) {
-            telemetry.addData("Location", ourCam.getPixelLocationRed().name());
-            telemetry.update();
-        }
+waitForStart();
     }
-}
-*/
+}*/
+

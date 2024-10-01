@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.drive.opmode.visionIntoTheDeep;
 
-import android.graphics.YuvImage;
-
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -17,6 +15,7 @@ public class itdCameraPipeline extends OpenCvPipeline {
 
     private final Mat clean = new Mat();
     //Diagnostic matrix to adjust camera.
+
 
     public enum sampleAngleStage {
     farLeft,
@@ -89,100 +88,83 @@ public class itdCameraPipeline extends OpenCvPipeline {
 
         Imgproc.cvtColor(input, grayscale, Imgproc.COLOR_RGB2GRAY);
         //converts image to grayscale
-        input.copyTo(clean);
-        grayscale.copyTo(aMat);
-        grayscale.copyTo(bMat);
-        grayscale.copyTo(cMat);
-        grayscale.copyTo(dMat);
-        grayscale.copyTo(eMat);
-        grayscale.copyTo(fMat);
-        grayscale.copyTo(gMat);
+        input.copyTo(grayscale);
+            // Process each region directly without redundant copying
+            Mat aMat = grayscale.submat(aRect); // Get submat for 'A' region
+            Scalar avgIntensityA = Core.mean(aMat); // Calculate average intensity
+            aAvg = avgIntensityA.val[0]; // Store the average intensity
 
-        grayscale.copyTo(farLeftMat);
-        grayscale.copyTo(middleLeftMat);
-        grayscale.copyTo(nearLeftMat);
-        grayscale.copyTo(centerMat);
-        grayscale.copyTo(nearRightMat);
-        grayscale.copyTo(middleRightMat);
-        grayscale.copyTo(farRightMat);
-        // copies grayscale to all inputs and output screen
+            Mat bMat = grayscale.submat(bRect); // Get submat for 'B' region
+            Scalar avgIntensityB = Core.mean(bMat);
+            bAvg = avgIntensityB.val[0];
 
-        aMat = input.submat(aRect); //defines aMat's location as aRect
-        Scalar avgIntensityA = Core.mean(aMat); //Detects the average intensity of aMat and stores it as a scalar
-        aAvg = avgIntensityA.val[0]; //stores the Scalar value as a variable
+            Mat cMat = grayscale.submat(cRect);
+            Scalar avgIntensityC = Core.mean(cMat);
+            cAvg = avgIntensityC.val[0];
 
-        bMat = input.submat(bRect); //defines bMat's location as bRect
-        Scalar avgIntensityB = Core.mean(bMat); //Detects the average intensity of bMat and stores it as a scalar
-        bAvg = avgIntensityB.val[0]; //stores the Scalar value as a variable
+            // Continue for other regions...
+            Mat dMat = grayscale.submat(dRect);
+            Scalar avgIntensityD = Core.mean(dMat);
+            dAvg = avgIntensityD.val[0];
 
-        cMat = input.submat(cRect); //defines cMat's location as cRect
-        Scalar avgIntensityC = Core.mean(cMat); //Detects the average intensity of cMat and stores it as a scalar
-        cAvg = avgIntensityC.val[0]; //stores the Scalar value as a variable
+            Mat eMat = grayscale.submat(eRect);
+            Scalar avgIntensityE = Core.mean(eMat);
+            dAvg = avgIntensityE.val[0];
 
-        dMat = input.submat(dRect); //defines bMat's location as bRect
-        Scalar avgIntensityD = Core.mean(dMat); //Detects the average intensity of bMat and stores it as a scalar
-        dAvg = avgIntensityD.val[0]; //stores the Scalar value as a variable
+            Mat fMat = grayscale.submat(fRect);
+            Scalar avgIntensityF = Core.mean(fMat);
+            fAvg = avgIntensityF.val[0];
 
-        eMat = input.submat(eRect); //defines cMat's location as cRect
-        Scalar avgIntensityE = Core.mean(eMat); //Detects the average intensity of cMat and stores it as a scalar
-        eAvg = avgIntensityE.val[0]; //stores the Scalar value as a variable
+            Mat gMat = grayscale.submat(gRect);
+            Scalar avgIntensityG = Core.mean(gMat);
+            gAvg = avgIntensityG.val[0];
 
-        fMat = input.submat(fRect); //defines bMat's location as bRect
-        Scalar avgIntensityF = Core.mean(fMat); //Detects the average intensity of bMat and stores it as a scalar
-        fAvg = avgIntensityF.val[0]; //stores the Scalar value as a variable
+            // Repeat for other regions like nearLeft, farRight, etc.
+            Mat farLeftMat = grayscale.submat(farLeftRect);
+            Scalar avgIntensityFarLeft = Core.mean(farLeftMat);
+            farLeftAvg = avgIntensityFarLeft.val[0];
 
-        gMat = input.submat(gRect); //defines cMat's location as cRect
-        Scalar avgIntensityG = Core.mean(gMat); //Detects the average intensity of cMat and stores it as a scalar
-        gAvg = avgIntensityG.val[0]; //stores the Scalar value as a variable
+            Mat middleLeftMat = grayscale.submat(middleLeftRect);
+            Scalar avgIntensityMiddleLeft = Core.mean(middleLeftMat);
+            middleLeftAvg = avgIntensityMiddleLeft.val[0];
 
+            Mat nearLeftMat = grayscale.submat(nearLeftRect);
+            Scalar avgIntensityNearLeft = Core.mean(nearLeftMat);
+            nearLeftAvg = avgIntensityNearLeft.val[0];
 
-        //I'm not writing these anymore you understand whats going on...
+            Mat centerMat = grayscale.submat(centerRect);
+            Scalar avgIntensityCenter = Core.mean(centerMat);
+            centerAvg = avgIntensityCenter.val[0];
 
-        farLeftMat = input.submat(farLeftRect);
-        Scalar avgIntensityfLR = Core.mean(farLeftMat);
-        farLeftAvg = avgIntensityfLR.val[0];
+            Mat nearRightMat = grayscale.submat(nearRightRect);
+            Scalar avgIntensityNearRight = Core.mean(nearRightMat);
+            nearRightAvg = avgIntensityNearRight.val[0];
 
-        middleLeftMat = input.submat(middleLeftRect);
-        Scalar avgIntensitymLR = Core.mean(middleLeftMat);
-        middleLeftAvg = avgIntensitymLR.val[0];
+            Mat middleRightMat = grayscale.submat(middleRightRect);
+            Scalar avgIntensityMiddleRight = Core.mean(middleRightMat);
+            middleRightAvg = avgIntensityMiddleRight.val[0];
 
-        nearLeftMat = input.submat(nearLeftRect);
-        Scalar avgIntensitynLR = Core.mean(nearLeftMat);
-        nearLeftAvg = avgIntensitynLR.val[0];
-
-        centerMat = input.submat(centerRect);
-        Scalar avgIntensityCenter = Core.mean(centerMat);
-        centerAvg = avgIntensityCenter.val[0];
-
-        nearRightMat = input.submat(nearRightRect);
-        Scalar avgIntensitynRR = Core.mean(nearRightMat);
-        nearRightAvg = avgIntensitynRR.val[0];
-
-        middleRightMat = input.submat(middleRightRect);
-        Scalar avgIntensitymRR = Core.mean(middleRightMat);
-        middleRightAvg = avgIntensitymRR.val[0];
-
-        farRightMat = input.submat(farRightRect);
-        Scalar avgIntensityfRR = Core.mean(farRightMat);
-        farRightAvg = avgIntensityfRR.val[0];
+            Mat farRightMat = grayscale.submat(farRightRect);
+            Scalar avgIntensityFarRight = Core.mean(farRightMat);
+            farRightAvg = avgIntensityFarRight.val[0];
 
 
 
-        Imgproc.rectangle(clean, aRect, new Scalar(255.0, 255.0, 0.0), 2);
-        Imgproc.rectangle(clean, bRect, new Scalar(255.0, 255.0, 0.0), 2);
-        Imgproc.rectangle(clean, cRect, new Scalar(255.0, 255.0, 0.0), 2);
-        Imgproc.rectangle(clean, dRect, new Scalar(255.0, 255.0, 0.0), 2);
-        Imgproc.rectangle(clean, eRect, new Scalar(255.0, 255.0, 0.0), 2);
-        Imgproc.rectangle(clean, fRect, new Scalar(255.0, 255.0, 0.0), 2);
-        Imgproc.rectangle(clean, gRect, new Scalar(255.0, 255.0, 0.0), 2);
+        /*Imgproc.rectangle(grayscale, aRect, new Scalar(255.0, 255.0, 0.0), 2);
+        Imgproc.rectangle(grayscale, bRect, new Scalar(255.0, 255.0, 0.0), 2);
+        Imgproc.rectangle(grayscale, cRect, new Scalar(255.0, 255.0, 0.0), 2);
+        Imgproc.rectangle(grayscale, dRect, new Scalar(255.0, 255.0, 0.0), 2);
+        Imgproc.rectangle(grayscale, eRect, new Scalar(255.0, 255.0, 0.0), 2);
+        Imgproc.rectangle(grayscale, fRect, new Scalar(255.0, 255.0, 0.0), 2);
+        Imgproc.rectangle(grayscale, gRect, new Scalar(255.0, 255.0, 0.0), 2);
 
-        Imgproc.rectangle(clean, farLeftRect, new Scalar(255.0,0.0,255.0),2);
-        Imgproc.rectangle(clean, middleLeftRect, new Scalar(255.0,0.0,255.0),2);
-        Imgproc.rectangle(clean, nearLeftRect, new Scalar(255.0,0.0,255.0),2);
-        Imgproc.rectangle(clean, centerRect, new Scalar(255.0,0.0,255.0),2);
-        Imgproc.rectangle(clean, nearRightRect, new Scalar(255.0,0.0,255.0),2);
-        Imgproc.rectangle(clean, middleRightRect, new Scalar(255.0,0.0,255.0),2);
-        Imgproc.rectangle(clean, farRightRect, new Scalar(255.0,0.0,255.0),2);
+        Imgproc.rectangle(grayscale, farLeftRect, new Scalar(255.0,0.0,255.0),2);
+        Imgproc.rectangle(grayscale, middleLeftRect, new Scalar(255.0,0.0,255.0),2);
+        Imgproc.rectangle(grayscale, nearLeftRect, new Scalar(255.0,0.0,255.0),2);
+        Imgproc.rectangle(grayscale, centerRect, new Scalar(255.0,0.0,255.0),2);
+        Imgproc.rectangle(grayscale, nearRightRect, new Scalar(255.0,0.0,255.0),2);
+        Imgproc.rectangle(grayscale, middleRightRect, new Scalar(255.0,0.0,255.0),2);
+        Imgproc.rectangle(grayscale, farRightRect, new Scalar(255.0,0.0,255.0),2);*/
         // Creates rectangles on the driver hub vision screen for each matrix to better diagnose issues,
         // and visualize what stage is active.
 
@@ -215,9 +197,9 @@ public class itdCameraPipeline extends OpenCvPipeline {
         String getAngle = angle[minAngleIndex];
         String getSampleHeight = sampleHeight[minHeightIndex];
 
-        Imgproc.putText(clean, getSampleHeight, new Point(25, 100), Imgproc.FONT_HERSHEY_SIMPLEX, 3.0, new Scalar(0.0, 255.0, 0.0));
+        Imgproc.putText(grayscale, getSampleHeight, new Point(25, 100), Imgproc.FONT_HERSHEY_SIMPLEX, 3.0, new Scalar(255.0, 255.0, 0.0));
         // displays the measured Sample Location on screen.
-        Imgproc.putText(clean, getAngle, new Point(100, 100), Imgproc.FONT_HERSHEY_SIMPLEX,3.0, new Scalar(255.0,0.0,255.0));
+        Imgproc.putText(grayscale, getAngle, new Point(100, 100), Imgproc.FONT_HERSHEY_SIMPLEX,3.0, new Scalar(255.0,0.0,255.0));
         // displays the measured angle on screen.
-        return clean;
+        return grayscale;
     }}
