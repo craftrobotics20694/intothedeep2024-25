@@ -43,7 +43,7 @@ public class visiontest extends LinearOpMode {
             @Override
             public void onOpened() {
                 // Start streaming in MJPEG format with a specified resolution
-                webcam1.startStreaming(width, height, OpenCvCameraRotation.UPSIDE_DOWN, OpenCvWebcam.StreamFormat.MJPEG);
+                webcam1.startStreaming(width, height, OpenCvCameraRotation.UPRIGHT, OpenCvWebcam.StreamFormat.MJPEG);
             }
 
             @Override

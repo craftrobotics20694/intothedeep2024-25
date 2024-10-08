@@ -89,66 +89,23 @@ public class itdCameraPipeline extends OpenCvPipeline {
         Imgproc.cvtColor(input, grayscale, Imgproc.COLOR_RGB2GRAY);
         //converts image to grayscale
         input.copyTo(grayscale);
-            // Process each region directly without redundant copying
-            Mat aMat = grayscale.submat(aRect); // Get submat for 'A' region
-            Scalar avgIntensityA = Core.mean(aMat); // Calculate average intensity
-            aAvg = avgIntensityA.val[0]; // Store the average intensity
 
-            Mat bMat = grayscale.submat(bRect); // Get submat for 'B' region
-            Scalar avgIntensityB = Core.mean(bMat);
-            bAvg = avgIntensityB.val[0];
+        aAvg = calculateAverageIntensity(grayscale.submat(aRect));
+        bAvg = calculateAverageIntensity(grayscale.submat(bRect));
+        cAvg = calculateAverageIntensity(grayscale.submat(cRect));
+        dAvg = calculateAverageIntensity(grayscale.submat(dRect));
+        eAvg = calculateAverageIntensity(grayscale.submat(eRect));
+        fAvg = calculateAverageIntensity(grayscale.submat(fRect));
+        gAvg = calculateAverageIntensity(grayscale.submat(gRect));
 
-            Mat cMat = grayscale.submat(cRect);
-            Scalar avgIntensityC = Core.mean(cMat);
-            cAvg = avgIntensityC.val[0];
-
-            // Continue for other regions...
-            Mat dMat = grayscale.submat(dRect);
-            Scalar avgIntensityD = Core.mean(dMat);
-            dAvg = avgIntensityD.val[0];
-
-            Mat eMat = grayscale.submat(eRect);
-            Scalar avgIntensityE = Core.mean(eMat);
-            dAvg = avgIntensityE.val[0];
-
-            Mat fMat = grayscale.submat(fRect);
-            Scalar avgIntensityF = Core.mean(fMat);
-            fAvg = avgIntensityF.val[0];
-
-            Mat gMat = grayscale.submat(gRect);
-            Scalar avgIntensityG = Core.mean(gMat);
-            gAvg = avgIntensityG.val[0];
-
-            // Repeat for other regions like nearLeft, farRight, etc.
-            Mat farLeftMat = grayscale.submat(farLeftRect);
-            Scalar avgIntensityFarLeft = Core.mean(farLeftMat);
-            farLeftAvg = avgIntensityFarLeft.val[0];
-
-            Mat middleLeftMat = grayscale.submat(middleLeftRect);
-            Scalar avgIntensityMiddleLeft = Core.mean(middleLeftMat);
-            middleLeftAvg = avgIntensityMiddleLeft.val[0];
-
-            Mat nearLeftMat = grayscale.submat(nearLeftRect);
-            Scalar avgIntensityNearLeft = Core.mean(nearLeftMat);
-            nearLeftAvg = avgIntensityNearLeft.val[0];
-
-            Mat centerMat = grayscale.submat(centerRect);
-            Scalar avgIntensityCenter = Core.mean(centerMat);
-            centerAvg = avgIntensityCenter.val[0];
-
-            Mat nearRightMat = grayscale.submat(nearRightRect);
-            Scalar avgIntensityNearRight = Core.mean(nearRightMat);
-            nearRightAvg = avgIntensityNearRight.val[0];
-
-            Mat middleRightMat = grayscale.submat(middleRightRect);
-            Scalar avgIntensityMiddleRight = Core.mean(middleRightMat);
-            middleRightAvg = avgIntensityMiddleRight.val[0];
-
-            Mat farRightMat = grayscale.submat(farRightRect);
-            Scalar avgIntensityFarRight = Core.mean(farRightMat);
-            farRightAvg = avgIntensityFarRight.val[0];
-
-
+        // Calculate averages for angle regions
+        farLeftAvg = calculateAverageIntensity(grayscale.submat(farLeftRect));
+        middleLeftAvg = calculateAverageIntensity(grayscale.submat(middleLeftRect));
+        nearLeftAvg = calculateAverageIntensity(grayscale.submat(nearLeftRect));
+        centerAvg = calculateAverageIntensity(grayscale.submat(centerRect));
+        nearRightAvg = calculateAverageIntensity(grayscale.submat(nearRightRect));
+        middleRightAvg = calculateAverageIntensity(grayscale.submat(middleRightRect));
+        farRightAvg = calculateAverageIntensity(grayscale.submat(farRightRect));
 
         /*Imgproc.rectangle(grayscale, aRect, new Scalar(255.0, 255.0, 0.0), 2);
         Imgproc.rectangle(grayscale, bRect, new Scalar(255.0, 255.0, 0.0), 2);
@@ -202,4 +159,8 @@ public class itdCameraPipeline extends OpenCvPipeline {
         Imgproc.putText(grayscale, getAngle, new Point(100, 100), Imgproc.FONT_HERSHEY_SIMPLEX,3.0, new Scalar(255.0,0.0,255.0));
         // displays the measured angle on screen.
         return grayscale;
+    }
+    private double calculateAverageIntensity(Mat region) {
+        Scalar avgIntensity = Core.mean(region);
+        return avgIntensity.val[0];
     }}
