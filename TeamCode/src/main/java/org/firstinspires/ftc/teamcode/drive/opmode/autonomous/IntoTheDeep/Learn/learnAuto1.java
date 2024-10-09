@@ -1,6 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.IntoTheDeep.learn;
-
-import androidx.annotation.NonNull;
+package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.IntoTheDeep.Learn;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -9,7 +7,6 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 
@@ -60,8 +57,3 @@ public class learnAuto1 extends LinearOpMode {
         );
     }
 }
-
-/*
-
-
-*/

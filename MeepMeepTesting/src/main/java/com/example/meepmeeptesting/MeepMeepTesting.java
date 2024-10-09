@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 public class MeepMeepTesting {
     public static void main(String[] args) {
         System.setProperty("sun.java2d.opengl", "true");
-        MeepMeep meepMeep = new MeepMeep(1000);
+        MeepMeep meepMeep = new MeepMeep(800);
 
         // Defining our first bot
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
@@ -25,28 +25,19 @@ public class MeepMeepTesting {
                 .build();
 
         // Building the trajectory for our first bot
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-35, 60, Math.toRadians(270)))
-                        .turn(Math.toRadians(90))
-                        .lineToX(34)
-                        .turn(Math.toRadians(-90))
-                        .lineToY(34)
-                        .turn(Math.toRadians(90))
-                        .lineToX(60)
-                        .turn(Math.toRadians(-90))
-                        .lineToY(-34)
-                        .turn(Math.toRadians(-90))
-                        .lineToX(0)
-                        .turn(Math.toRadians(90))
-                        .lineToY(-60)
-                        .turn(Math.toRadians(90))
-                        .lineToX(35)
-                        .turn(Math.toRadians(90))
-                        .build());
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0, 0, Math.toRadians(90)))
+                .setTangent(0)
+                .splineTo(new Vector2d(40, 40), Math.toRadians(90))
+                .build());
 
         // Getting the image of our play field to be used
         Image img = null;
-        try {img = ImageIO.read(new File("MeepMeepTesting/src/main/java/com/example/meepmeeptesting/FIELD_INTOTHEDEEP.png")); }
-            catch (IOException e) {}
+        try {
+            img = ImageIO.read(new File("MeepMeepTesting/src/main/java/com/example/meepmeeptesting/FIELD_INTOTHEDEEP.png"));
+        }
+        catch (IOException e) {
+            System.out.println("Exception: " + e);
+        }
 
         meepMeep.setBackground(img)
                 .setDarkMode(true)

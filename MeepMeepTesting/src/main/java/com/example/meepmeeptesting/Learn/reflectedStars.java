@@ -1,4 +1,4 @@
-package com.example.meepmeeptesting;
+package com.example.meepmeeptesting.Learn;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 public class reflectedStars {
     public static void main(String[] args) {
         System.setProperty("sun.java2d.opengl", "true");
-        MeepMeep meepMeep = new MeepMeep(1000);
+        MeepMeep meepMeep = new MeepMeep(800);
 
         // Defining our first bot
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)

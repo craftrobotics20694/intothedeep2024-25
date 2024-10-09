@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.IntoTheDeep.learn;
+package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.IntoTheDeep.Learn;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.IntoTheDeep.learn;
+package org.firstinspires.ftc.teamcode.drive.opmode.autonomous.IntoTheDeep.Learn;
 
 import androidx.annotation.NonNull;
 
@@ -23,25 +23,28 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 @Autonomous(name = "learnAuto2", group = "learn")
 public class learnAuto2 extends LinearOpMode {
 
-    // Here we make a
-    public class Claw {
-        private Servo claw; // Define a variable called claw that is of the Servo class
+    // Here we make a class for our Claw
+    public static class Claw {
+        private final Servo clawLeft, clawRight; // Define a variable called claw that is of the Servo class
 
         // This is the constructor for our Claw class
         public Claw(HardwareMap hardwareMap) {
             // We locate the servo in the hardware map and assign it to the
             //   claw variable we created early
-            claw = hardwareMap.get(Servo.class, "clawServo");
+            clawLeft = hardwareMap.get(Servo.class, "clawLeft");
+            clawRight = hardwareMap.get(Servo.class, "clawRight");
         }
 
         // This is a method called CloseClaw that inherits from the Action class
+        // We'll be able to use these methods on any instance our our Claw class
         public class CloseClaw implements Action {
             // We override the run function from the Action class
             //   and specify what we want to do when the function is run
             //   this allows us to call the function as an action
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
-                claw.setPosition(Math.toRadians(0));
+                clawLeft.setPosition(Math.toRadians(0)); // Setting the position of the left side servo
+                clawRight.setPosition(Math.toRadians(0)); // Setting the position of the right side servo
                 return false;
             }
         }
@@ -57,7 +60,8 @@ public class learnAuto2 extends LinearOpMode {
         public class OpenClaw implements Action {
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
-                claw.setPosition(180);
+                clawLeft.setPosition(Math.toRadians(1)); // Setting the position of the left side servo
+                clawRight.setPosition(Math.toRadians(1)); // Setting the position of the right side servo
                 return false;
             }
         }
@@ -80,8 +84,6 @@ public class learnAuto2 extends LinearOpMode {
         Action trajectoryAction1;
         Action trajectoryAction2;
 
-        waitForStart();
-        
         // Define action variables
         trajectoryAction1 = drive.actionBuilder(drive.pose)
                 .turn(Math.toRadians(-90))
@@ -118,6 +120,9 @@ public class learnAuto2 extends LinearOpMode {
                 .lineToX(35)
                 .turn(Math.toRadians(90))
                 .build();
+
+        // This stops everything the robot does until the start button is pressed
+        waitForStart();
 
         // This runs our actions
         Actions.runBlocking(
