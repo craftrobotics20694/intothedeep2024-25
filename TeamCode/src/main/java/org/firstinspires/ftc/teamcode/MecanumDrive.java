@@ -121,7 +121,7 @@ public final class MecanumDrive {
     private final DownsampledWriter mecanumCommandWriter = new DownsampledWriter("MECANUM_COMMAND", 50_000_000);
 
     public class DriveLocalizer implements Localizer {
-        public final Encoder leftFront, leftBack, rightBack, rightFront;
+        public final Encoder leftDeadWheel, perpDeadWheel, rightDeadWheel, rightFront;
         public final IMU imu;
 
         private int lastLeftFrontPos, lastLeftBackPos, lastRightBackPos, lastRightFrontPos;
@@ -129,24 +129,24 @@ public final class MecanumDrive {
         private boolean initialized;
 
         public DriveLocalizer() {
-            leftFront = new OverflowEncoder(new RawEncoder(MecanumDrive.this.leftFront));
-            leftBack = new OverflowEncoder(new RawEncoder(MecanumDrive.this.leftBack));
-            rightBack = new OverflowEncoder(new RawEncoder(MecanumDrive.this.rightBack));
+            leftDeadWheel = new OverflowEncoder(new RawEncoder(MecanumDrive.this.leftFront));
+            perpDeadWheel = new OverflowEncoder(new RawEncoder(MecanumDrive.this.leftBack));
+            rightDeadWheel = new OverflowEncoder(new RawEncoder(MecanumDrive.this.rightBack));
             rightFront = new OverflowEncoder(new RawEncoder(MecanumDrive.this.rightFront));
 
             imu = lazyImu.get();
 
             // This is where you reverse the direction of the dead wheel encoders
             // Note that these also must be reversed in the ThreeDeadWheellocalizer class
-            rightFront.setDirection(DcMotorSimple.Direction.REVERSE); // Reverse the right dead wheel
-            leftBack.setDirection(DcMotorSimple.Direction.REVERSE); // Reverse perpendicular dead wheel
+            rightBack.setDirection(DcMotorSimple.Direction.REVERSE); // Reverse the right dead wheel
+            perpDeadWheel.setDirection(DcMotorSimple.Direction.REVERSE); // Reverse perpendicular dead wheel
         }
 
         @Override
         public Twist2dDual<Time> update() {
-            PositionVelocityPair leftFrontPosVel = leftFront.getPositionAndVelocity();
-            PositionVelocityPair leftBackPosVel = leftBack.getPositionAndVelocity();
-            PositionVelocityPair rightBackPosVel = rightBack.getPositionAndVelocity();
+            PositionVelocityPair leftFrontPosVel = leftDeadWheel.getPositionAndVelocity();
+            PositionVelocityPair leftBackPosVel = perpDeadWheel.getPositionAndVelocity();
+            PositionVelocityPair rightBackPosVel = rightDeadWheel.getPositionAndVelocity();
             PositionVelocityPair rightFrontPosVel = rightFront.getPositionAndVelocity();
 
             YawPitchRollAngles angles = imu.getRobotYawPitchRollAngles();
@@ -215,24 +215,24 @@ public final class MecanumDrive {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
 
-        // Define your motors here
-        // Make sure you've configured your bot with these motor names
+        // TODO: Define motors here
+        // Drive Motors
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
         leftBack = hardwareMap.get(DcMotorEx.class, "leftBack");
         rightBack = hardwareMap.get(DcMotorEx.class, "rightBack");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
 
+        // When there is no power applied to the robot the motors will lock
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        // This is where you reverse your motor directions
+        // TODO: This is where you reverse your motor directions
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        // TODO: make sure your config has an IMU with this name (can be BNO or BHI)
-        //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
+        // We do not use the IMU
         lazyImu = new LazyImu(hardwareMap, "imu", new RevHubOrientationOnRobot(
                 PARAMS.logoFacingDirection, PARAMS.usbFacingDirection));
 

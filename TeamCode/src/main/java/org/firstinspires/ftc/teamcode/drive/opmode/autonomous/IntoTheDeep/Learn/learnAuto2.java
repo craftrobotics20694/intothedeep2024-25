@@ -43,8 +43,8 @@ public class learnAuto2 extends LinearOpMode {
             //   this allows us to call the function as an action
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
-                clawLeft.setPosition(Math.toRadians(0)); // Setting the position of the left side servo
-                clawRight.setPosition(Math.toRadians(0)); // Setting the position of the right side servo
+                clawLeft.setPosition(0); // Setting the position of the left side servo
+                clawRight.setPosition(0); // Setting the position of the right side servo
                 return false;
             }
         }
@@ -60,8 +60,8 @@ public class learnAuto2 extends LinearOpMode {
         public class OpenClaw implements Action {
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
-                clawLeft.setPosition(Math.toRadians(1)); // Setting the position of the left side servo
-                clawRight.setPosition(Math.toRadians(1)); // Setting the position of the right side servo
+                clawLeft.setPosition(1); // Setting the position of the left side servo
+                clawRight.setPosition(1); // Setting the position of the right side servo
                 return false;
             }
         }
@@ -126,12 +126,11 @@ public class learnAuto2 extends LinearOpMode {
 
         // This runs our actions
         Actions.runBlocking(
-                // We put our individual actions inside of a sequential action to run them in sequence
                 new SequentialAction(
-                        trajectoryAction1,
                         claw.closeClaw(),
-                        trajectoryAction2
-                )
-        );
+                        claw.openClaw(),
+                        claw.closeClaw(),
+                        claw.openClaw()
+            ));
     }
 }

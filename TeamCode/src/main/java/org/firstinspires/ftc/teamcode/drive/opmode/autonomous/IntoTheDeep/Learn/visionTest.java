@@ -11,9 +11,9 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-@Autonomous(name = "visiontest", group = "learn")
+@Autonomous(name = "visionTest", group = "learn")
 @Config
-public class visiontest extends LinearOpMode {
+public class visionTest extends LinearOpMode {
 
     OpenCvWebcam webcam1 = null;
     itdCameraPipeline itdCam = new itdCameraPipeline();
