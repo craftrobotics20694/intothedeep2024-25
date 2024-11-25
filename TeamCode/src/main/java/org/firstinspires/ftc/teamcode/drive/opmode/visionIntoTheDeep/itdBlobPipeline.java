@@ -62,6 +62,6 @@ public class itdBlobPipeline extends OpenCvPipeline {
         binary.release();
         //release resources
 
-      return binary;
+        return binary;
     }
 }
