@@ -59,8 +59,9 @@ public class itdBlobPipeline extends OpenCvPipeline {
         }
         grayscale.release();
         hierarchy.release();
+        binary.release();
         //release resources
 
-      return input;
+      return binary;
     }
 }
