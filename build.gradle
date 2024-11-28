@@ -26,4 +26,3 @@ allprojects {
 repositories {
     mavenCentral()
 }
-android.buildFeatures.buildConfig = true
