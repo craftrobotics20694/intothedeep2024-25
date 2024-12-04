@@ -11,7 +11,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-@Autonomous(name = "visionTest", group = "learn")
+@Autonomous(name = "blobTest", group = "learn")
 @Config
 public class blobTest extends LinearOpMode {
 
