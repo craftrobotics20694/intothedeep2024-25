@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.ServoImplEx;
 
 @TeleOp(name="ManualSlopMode", group="practice")
 public class manualTest extends OpMode{
@@ -13,7 +14,7 @@ public class manualTest extends OpMode{
     DcMotor leftFront, rightFront, leftBack, rightBack; // Drive Motors
     DcMotor leftSlide, rightSlide, leftSlidePivot, rightSlidePivot; // Slide Motors
 
-    Servo leftClaw, rightClaw; // Claw Servos
+    ServoImplEx leftClaw, rightClaw; // Claw Servos
 
     double leftSlideStartPos;
     double rightSlideStartPos;
@@ -49,8 +50,8 @@ public class manualTest extends OpMode{
         rightSlidePivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Claw Servos
-        leftClaw = hardwareMap.servo.get("leftClaw");
-        rightClaw = hardwareMap.servo.get("rightClaw");
+        leftClaw = hardwareMap.get(ServoImplEx.class, "leftClaw");
+        rightClaw = hardwareMap.get(ServoImplEx.class, "rightClaw");
 
         // Set the slide motors to brake when no power is applied
         leftSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
