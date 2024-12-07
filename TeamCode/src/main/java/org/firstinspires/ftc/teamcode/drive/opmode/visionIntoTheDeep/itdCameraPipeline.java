@@ -86,9 +86,9 @@ public class itdCameraPipeline extends OpenCvPipeline {
     @Override
     public Mat processFrame(Mat input) {
 
-        input.copyTo(grayscale);
-        //converts image to grayscale
         Imgproc.cvtColor(input, grayscale, Imgproc.COLOR_RGB2GRAY);
+        //converts image to grayscale
+        input.copyTo(grayscale);
 
         aAvg = calculateAverageIntensity(grayscale.submat(aRect));
         bAvg = calculateAverageIntensity(grayscale.submat(bRect));
@@ -158,7 +158,7 @@ public class itdCameraPipeline extends OpenCvPipeline {
         // displays the measured Sample Location on screen.
         Imgproc.putText(grayscale, getAngle, new Point(100, 100), Imgproc.FONT_HERSHEY_SIMPLEX,3.0, new Scalar(255.0,0.0,255.0));
         // displays the measured angle on screen.
-        return input;
+        return grayscale;
     }
     private double calculateAverageIntensity(Mat region) {
         Scalar avgIntensity = Core.mean(region);
