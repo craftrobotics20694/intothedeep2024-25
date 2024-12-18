@@ -43,25 +43,26 @@ public class itdBlobPipeline extends OpenCvPipeline {
                 double csf = (4 * Math.PI * area) / (perimeter * perimeter);
                 // csf stands for circular shape factor, this helps us figure out if the shape we are analyzing is a polygon or not.
 
-                Scalar color = new Scalar(0, 255, 0);
-                Imgproc.drawContours(input, List.of(contour), -1, color, 2);
-                // Draws line on output image so we can see what the system is identifying.
+                if (csf < 0.7) {
+                    Scalar color = new Scalar(0, 255, 0);
+                    Imgproc.drawContours(input, List.of(contour), -1, color, 2);
+                    // Draws line on output image so we can see what the system is identifying.
 
-                Moments moments = Imgproc.moments(contour);
-                int cx = (int) (moments.m10 / moments.m00);
-                int cy = (int) (moments.m01 / moments.m00);
-                // Grab center of centroid so we can place csf value in center for diagnostic purposes.
+                    Moments moments = Imgproc.moments(contour);
+                    int cx = (int) (moments.m10 / moments.m00);
+                    int cy = (int) (moments.m01 / moments.m00);
+                    // Grab center of centroid so we can place csf value in center for diagnostic purposes.
 
-                String getCSF = String.format("CSF: %.2f", csf);
-                Imgproc.putText(grayscale, getCSF, new Point(cx, cy), Imgproc.FONT_HERSHEY_SIMPLEX,3.0, new Scalar(255.0,0.0,255.0));
-                // Prints CSF values on objects
+                    String getCSF = String.format("CSF: %.2f", csf);
+                    Imgproc.putText(grayscale, getCSF, new Point(cx, cy), Imgproc.FONT_HERSHEY_SIMPLEX, 3.0, new Scalar(255.0, 0.0, 255.0));
+                    // Prints CSF values on objects
+                }
             }
         }
         grayscale.release();
         hierarchy.release();
-        binary.release();
         //release resources
 
-        return input;
+        return binary;
     }
 }
