@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.drive.opmode.visionIntoTheDeep;
 
+import static java.lang.Thread.sleep;
+
 import org.opencv.core.*;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.MatOfPoint2f;
@@ -54,8 +56,15 @@ public class itdBlobPipeline extends OpenCvPipeline {
                     // Grab center of centroid so we can place csf value in center for diagnostic purposes.
 
                     String getCSF = String.format("CSF: %.2f", csf);
-                    Imgproc.putText(grayscale, getCSF, new Point(cx, cy), Imgproc.FONT_HERSHEY_SIMPLEX, 3.0, new Scalar(255.0, 0.0, 255.0));
+                    Imgproc.putText(binary, getCSF, new Point(cx, cy), Imgproc.FONT_HERSHEY_SIMPLEX, 3.0, new Scalar(255.0, 0.0, 255.0));
                     // Prints CSF values on objects
+                }
+            }
+            if (area > 50000) {
+                try {
+                    wait(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
@@ -65,4 +74,5 @@ public class itdBlobPipeline extends OpenCvPipeline {
 
         return binary;
     }
+
 }
