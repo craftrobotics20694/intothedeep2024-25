@@ -23,11 +23,11 @@ public class mainManual extends OpMode{
     double leftSlidePivStartPos;
     double rightSlidePivStartPos;
 
-    // Create PID Instances for slides and pivots
-    private PIDController leftSlidePID;
-    private PIDController rightSlidePID;
-    private PIDController leftPivotPID;
-    private PIDController rightPivotPID;
+// Create PID Instances for slides and pivots
+//    private PIDController leftSlidePID;
+//    private PIDController rightSlidePID;
+//    private PIDController leftPivotPID;
+//    private PIDController rightPivotPID;
 
     private ElapsedTime loopTimer;
     private final double targetLoopTime = 0.05;
@@ -35,10 +35,10 @@ public class mainManual extends OpMode{
     public void init() {
         loopTimer = new ElapsedTime();
 
-        leftSlidePID = new PIDController(0.0, 0.0, 0.0);
-        rightSlidePID = new PIDController(0.0, 0.0, 0.0);
-        leftPivotPID = new PIDController(0.0, 0.0, 0.0);
-        rightPivotPID = new PIDController(0.0, 0.0, 0.0);
+//        leftSlidePID = new PIDController(0.0, 0.0, 0.0);
+//        rightSlidePID = new PIDController(0.0, 0.0, 0.0);
+//        leftPivotPID = new PIDController(0.0, 0.0, 0.0);
+//        rightPivotPID = new PIDController(0.0, 0.0, 0.0);
 
         // Drive Motors
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
@@ -190,6 +190,4 @@ public class mainManual extends OpMode{
         telemetry.addData("Loop Frequency (Hz)", 1.0 / elapsedTime);
         telemetry.update();
     }
-
-
 }
