@@ -34,7 +34,7 @@ public class learnAuto2 extends LinearOpMode {
 
         // Initialized claw variable as a member of the Claw class we made above
         claw = new Claw(hardwareMap);
-        slide = new Slide(hardwareMap);
+        slide = new Slide(hardwareMap, telemetry);
 
         // Create action variables
         Action trajectoryAction1;

@@ -16,19 +16,20 @@ public class AutoWithArmClaw extends LinearOpMode {
     @Override
     public void runOpMode() {
         claw = new Claw(hardwareMap);
-        slide = new Slide(hardwareMap);
+        slide = new Slide(hardwareMap, telemetry);
         // pivot = new Pivot(hardwareMap);
 
         waitForStart();
+        Actions.runBlocking(
+            slide.moveToHome(.5)
+        );
 
         while (opModeIsActive()) {
-            telemetry.addData("Left Slide Pos", slide.leftSlide.getCurrentPosition());
-            telemetry.addData("Right Slide Pos", slide.rightSlide.getCurrentPosition());
-            telemetry.update();
-
             Actions.runBlocking(
-                slide.moveToPosition(300, 50)
-            );
+                new SequentialAction(
+                    slide.moveToPosition(1500, 0.5),
+                    claw.openClaw()
+                ));
         }
     }
 }

@@ -13,14 +13,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Slide {
 
     public final DcMotor leftSlide, rightSlide;
+    public Telemetry telemetry;
 
-    public Slide(HardwareMap hardwareMap) {
+    public Slide(HardwareMap hardwareMap, Telemetry telemetry) {
+        this.telemetry = telemetry;
+
         leftSlide = hardwareMap.get(DcMotor.class, "leftSlide");
         rightSlide = hardwareMap.get(DcMotor.class, "rightSlide");
-
-        // Resets positional values to 0
-        leftSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         leftSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -56,8 +55,13 @@ public class Slide {
                 startTime = System.currentTimeMillis();
             }
 
+            telemetry.addData("Left Slide Position", leftSlide.getCurrentPosition());
+            telemetry.addData("Right Slide Position", rightSlide.getCurrentPosition());
+            telemetry.update();
+
+
             // Check if both motors are still running towards their target positions
-            if (Math.abs(leftSlide.getCurrentPosition() - targetPosition) > 10 || Math.abs(rightSlide.getCurrentPosition() - targetPosition) > 10) {
+            if (Math.abs(leftSlide.getCurrentPosition() - targetPosition) > 5 || Math.abs(rightSlide.getCurrentPosition() - targetPosition) > 5) {
                 return true; // Still moving
             }
 
@@ -68,8 +72,24 @@ public class Slide {
         }
     }
 
+    public class MoveToHome implements Action {
+        private final double power;
+
+        public MoveToHome(double power) {
+            this.power = power;
+        }
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            leftSlide.setPower(-0.5);
+            rightSlide.setPower(-0.5);
+            return false;
+        }
+
+    }
+
     public Action moveToHome(double power) {
-        return new MoveToPosition(0, power);
+        return new MoveToHome(power);
     }
 
     // Create a method to return a new MoveToPositionAction instance
