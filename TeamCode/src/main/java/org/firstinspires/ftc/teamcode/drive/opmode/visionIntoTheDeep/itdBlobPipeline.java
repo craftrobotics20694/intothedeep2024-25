@@ -60,13 +60,6 @@ public class itdBlobPipeline extends OpenCvPipeline {
                     // Prints CSF values on objects
                 }
             }
-            if (area > 50000) {
-                try {
-                    wait(3000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
         }
         grayscale.release();
         hierarchy.release();
