@@ -17,7 +17,7 @@ public class itdBlobPipeline extends OpenCvPipeline {
 
     private final Mat grayscale = new Mat();
     private final Mat binary = new Mat();
-
+    public boolean cameraBlocked;
     Mat hierarchy = new Mat();
 
     @Override
@@ -58,6 +58,12 @@ public class itdBlobPipeline extends OpenCvPipeline {
                     String getCSF = String.format("CSF: %.2f", csf);
                     Imgproc.putText(binary, getCSF, new Point(cx, cy), Imgproc.FONT_HERSHEY_SIMPLEX, 3.0, new Scalar(255.0, 0.0, 255.0));
                     // Prints CSF values on objects
+
+                    if (area < 40000) {
+                        cameraBlocked = true;
+                    } else {
+                        cameraBlocked = false;
+                    }
                 }
             }
         }
