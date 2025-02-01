@@ -72,6 +72,7 @@ public class mainManual extends OpMode{
         // TODO: Reverse Necessary Motors
         leftSlidePivot.setDirection(DcMotorSimple.Direction.REVERSE); // Reverse left pivot motor
         leftClaw.setDirection(Servo.Direction.REVERSE);
+        leftFront.setDirection(DcMotor.Direction.REVERSE);
 
         leftSlideStartPos = leftSlide.getCurrentPosition();
         rightSlideStartPos = rightSlide.getCurrentPosition();
@@ -95,17 +96,17 @@ public class mainManual extends OpMode{
         // Gamepad 1 controls the robot's movement
         double x = gamepad1.left_stick_x;
         double y = -gamepad1.left_stick_y;
-        double rotInput = gamepad1.left_trigger - gamepad1.right_trigger;
+        double rotInput = -gamepad1.right_stick_x;
 
         leftFront.setPower((y + x - rotInput));
-        leftBack.setPower((-y + x - rotInput));
-        rightFront.setPower((y - x + rotInput));
-        rightBack.setPower((y + x + rotInput));
+        leftBack.setPower((-y + x + rotInput)); // -y
+        rightFront.setPower((y + x + rotInput));
+        rightBack.setPower((y - x + rotInput));
 
         // Gamepad 2 controls the viperslides
         // Programming claw
         double closedPos = 0.65;
-        double openPos = 0.4;
+        double openPos = 0.42;
         double movementStep = 0.01; // Step size
 
         // Variables to track current claw positions

@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -33,7 +34,7 @@ public class Slide {
     public class MoveToPosition implements Action {
         private final int targetPosition;
         private final double power;
-        private long startTime = 0;
+        private boolean initialized = false;
 
         public MoveToPosition(int targetPosition, double power) {
             this.targetPosition = targetPosition;
@@ -42,7 +43,7 @@ public class Slide {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (startTime == 0) {
+            if (!initialized) {
                 leftSlide.setTargetPosition(targetPosition);
                 rightSlide.setTargetPosition(targetPosition);
 
@@ -52,7 +53,7 @@ public class Slide {
                 leftSlide.setPower(power);
                 rightSlide.setPower(power);
 
-                startTime = System.currentTimeMillis();
+                initialized = true;
             }
 
             telemetry.addData("Left Slide Position", leftSlide.getCurrentPosition());
@@ -72,8 +73,13 @@ public class Slide {
         }
     }
 
+
     public class MoveToHome implements Action {
         private final double power;
+        private final long timeThreshold = 500;
+        private final double stabilityThreshold = 5;
+        private double lastLeftPos, lastRightPos;
+        private long stableStartTime = 0;
 
         public MoveToHome(double power) {
             this.power = power;
@@ -81,20 +87,52 @@ public class Slide {
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            leftSlide.setPower(-0.5);
-            rightSlide.setPower(-0.5);
-            return false;
+            double currentLeftPos = leftSlide.getCurrentPosition();
+            double currentRightPos = rightSlide.getCurrentPosition();
+
+            // Set the motors to move down
+            leftSlide.setPower(-power);
+            rightSlide.setPower(-power);
+
+            // Check for stability using a movement threshold
+            boolean isStable = (Math.abs(currentLeftPos - lastLeftPos) < stabilityThreshold &&
+                    Math.abs(currentRightPos - lastRightPos) < stabilityThreshold);
+
+            if (isStable) {
+                if (stableStartTime == 0) {
+                    stableStartTime = System.currentTimeMillis();
+                }
+            } else {
+                stableStartTime = 0;
+            }
+
+            lastLeftPos = currentLeftPos;
+            lastRightPos = currentRightPos;
+
+            // Telemetry for debugging
+            telemetry.addData("Left Slide Position", currentLeftPos);
+            telemetry.addData("Right Slide Position", currentRightPos);
+            telemetry.addData("Stable Time Counter", stableStartTime == 0 ? 0 : System.currentTimeMillis() - stableStartTime);
+            telemetry.update();
+
+            // Stop motors and reset encoders after stability is confirmed
+            if (stableStartTime != 0 && System.currentTimeMillis() - stableStartTime >= timeThreshold) {
+                leftSlide.setPower(0);
+                rightSlide.setPower(0);
+
+                leftSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                rightSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+                return true; // Action complete
+            }
+
+            return false; // Action still in progress
         }
-
     }
+        public Action moveToHome(double power) {
+            return new MoveToHome(power);}
 
-    public Action moveToHome(double power) {
-        return new MoveToHome(power);
-    }
-
-    // Create a method to return a new MoveToPositionAction instance
-    public Action moveToPosition(int targetPosition, double power) {
-        return new MoveToPosition(targetPosition, power);
-    }
+        public Action moveToPosition(int targetPosition, double power) {
+            return new MoveToPosition(targetPosition, power);}
 
 }

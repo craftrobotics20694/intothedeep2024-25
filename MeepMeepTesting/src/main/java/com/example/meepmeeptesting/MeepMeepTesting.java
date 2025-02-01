@@ -25,10 +25,31 @@ public class MeepMeepTesting {
                 .build();
 
         // Building the trajectory for our first bot
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0, 0, Math.toRadians(90)))
-                .setTangent(0)
-                .splineTo(new Vector2d(40, 40), Math.toRadians(90))
-                .build());
+//        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(20, -56, Math.toRadians(90)))
+//                .turn(Math.toRadians(38))
+//                .strafeTo(new Vector2d( 0,-34))
+//                .waitSeconds(1)
+//                .turn(Math. toRadians (-125))
+//                .strafeTo(new Vector2d(40, -34))
+//                .turn(Math.toRadians(-60))
+//                .waitSeconds( 0.2)
+//                .strafeTo (new Vector2d( 56, -52))
+//                .waitSeconds(1.5)
+//                .turn(Math.toRadians(-145))
+//                .strafeTo(new Vector2d(0, -34))
+//                .waitSeconds(1)
+//                .build());
+
+        myBot.runAction(
+                myBot.getDrive().actionBuilder(new Pose2d(-28, 59, Math.toRadians(270)))
+                        .strafeTo(new Vector2d(0, 34))
+                        .waitSeconds(0.1)
+                        .strafeToSplineHeading(new Vector2d(-56, 50), Math.toRadians(90))
+                        .waitSeconds(.1)
+                        .strafeToSplineHeading(new Vector2d(0, 34), Math.toRadians(270))
+                        .strafeTo(new Vector2d(-60, 65))
+                        .build()
+        );
 
         // Getting the image of our play field to be used
         Image img = null;

@@ -61,13 +61,13 @@ public final class MecanumDrive {
                 RevHubOrientationOnRobot.UsbFacingDirection.UP;
 
         // drive model parameters
-        public double inPerTick = ((double) 32400 / 95); // Found with ForwardPushTest
+        public double inPerTick = ((double) 95 / 31955); // Found with ForwardPushTest
         public double lateralInPerTick = 263.9714568306282;
         public double trackWidthTicks = 4500;
 
         // feedforward parameters (in tick units)
-        public double kS = 0.714341443611568;
-        public double kV = 0.0006991866150215487;
+        public double kS = 1.2485143668709897;
+        public double kV = 0.0006834715839658053;
         public double kA = 0.0009999;
 
         // path profile parameters (in inches)
@@ -138,8 +138,8 @@ public final class MecanumDrive {
 
             // This is where you reverse the direction of the dead wheel encoders
             // Note that these also must be reversed in the ThreeDeadWheellocalizer class
-            rightBack.setDirection(DcMotorSimple.Direction.REVERSE); // Reverse the right dead wheel
-            perpDeadWheel.setDirection(DcMotorSimple.Direction.REVERSE); // Reverse perpendicular dead wheel
+            rightDeadWheel.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftDeadWheel.setDirection(DcMotorSimple.Direction.REVERSE);
         }
 
         @Override
@@ -230,6 +230,7 @@ public final class MecanumDrive {
 
         // TODO: This is where you reverse your motor directions
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // We do not use the IMU
         lazyImu = new LazyImu(hardwareMap, "imu", new RevHubOrientationOnRobot(
