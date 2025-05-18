@@ -127,8 +127,9 @@ public final class MecanumDrive {
         private int lastLeftFrontPos, lastLeftBackPos, lastRightBackPos, lastRightFrontPos;
         private Rotation2d lastHeading;
         private boolean initialized;
+        private Pose2d pose;
 
-        public DriveLocalizer() {
+        public DriveLocalizer(Pose2d pose) {
             leftDeadWheel = new OverflowEncoder(new RawEncoder(MecanumDrive.this.leftFront));
             perpDeadWheel = new OverflowEncoder(new RawEncoder(MecanumDrive.this.leftBack));
             rightDeadWheel = new OverflowEncoder(new RawEncoder(MecanumDrive.this.rightBack));
@@ -140,6 +141,7 @@ public final class MecanumDrive {
             // Note that these also must be reversed in the ThreeDeadWheellocalizer class
             rightDeadWheel.setDirection(DcMotorSimple.Direction.REVERSE);
             leftDeadWheel.setDirection(DcMotorSimple.Direction.REVERSE);
+            this.pose = pose;
         }
 
         @Override
@@ -238,7 +240,7 @@ public final class MecanumDrive {
 
         voltageSensor = hardwareMap.voltageSensor.iterator().next();
 
-        localizer = new TwoDeadWheelLocalizer(hardwareMap, PARAMS.inPerTick);
+        localizer = new DriveLocalizer(pose);
 
         FlightRecorder.write("MECANUM_PARAMS", PARAMS);
     }
