@@ -33,14 +33,14 @@ public class LocalizationTest extends LinearOpMode {
 
                 drive.updatePoseEstimate();
 
-                telemetry.addData("x", drive.pose.position.x);
-                telemetry.addData("y", drive.pose.position.y);
-                telemetry.addData("heading (deg)", Math.toDegrees(drive.pose.heading.toDouble()));
+                telemetry.addData("x", drive.localizer.getPose().position.x);
+                telemetry.addData("y", drive.localizer.getPose().position.y);
+                telemetry.addData("heading (deg)", Math.toDegrees(drive.localizer.getPose().heading.toDouble()));
                 telemetry.update();
 
                 TelemetryPacket packet = new TelemetryPacket();
                 packet.fieldOverlay().setStroke("#3F51B5");
-                Drawing.drawRobot(packet.fieldOverlay(), drive.pose);
+                Drawing.drawRobot(packet.fieldOverlay(), drive.localizer.getPose());
                 FtcDashboard.getInstance().sendTelemetryPacket(packet);
             }
         } else if (TuningOpModes.DRIVE_CLASS.equals(TankDrive.class)) {
@@ -59,14 +59,14 @@ public class LocalizationTest extends LinearOpMode {
 
                 drive.updatePoseEstimate();
 
-                telemetry.addData("x", drive.pose.position.x);
-                telemetry.addData("y", drive.pose.position.y);
-                telemetry.addData("heading (deg)", Math.toDegrees(drive.pose.heading.toDouble()));
+                telemetry.addData("x", drive.localizer.getPose().position.x);
+                telemetry.addData("y", drive.localizer.getPose().position.y);
+                telemetry.addData("heading (deg)", Math.toDegrees(drive.localizer.getPose().heading.toDouble()));
                 telemetry.update();
 
                 TelemetryPacket packet = new TelemetryPacket();
                 packet.fieldOverlay().setStroke("#3F51B5");
-                Drawing.drawRobot(packet.fieldOverlay(), drive.pose);
+                Drawing.drawRobot(packet.fieldOverlay(), drive.localizer.getPose());
                 FtcDashboard.getInstance().sendTelemetryPacket(packet);
             }
         } else {

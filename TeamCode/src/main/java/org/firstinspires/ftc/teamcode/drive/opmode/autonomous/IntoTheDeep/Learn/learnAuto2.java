@@ -41,7 +41,7 @@ public class learnAuto2 extends LinearOpMode {
         Action trajectoryAction2;
 
         // Define action variables
-        trajectoryAction1 = drive.actionBuilder(drive.pose)
+        trajectoryAction1 = drive.actionBuilder(drive.localizer.getPose())
 //                .turn(Math.toRadians(-90))
 //                .lineToX(0)
 //                .turn(Math.toRadians(90))

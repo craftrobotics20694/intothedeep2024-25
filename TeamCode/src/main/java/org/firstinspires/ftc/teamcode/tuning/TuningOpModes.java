@@ -61,10 +61,10 @@ public final class TuningOpModes {
                 List<Encoder> parEncs = new ArrayList<>(), perpEncs = new ArrayList<>();
                 if (md.localizer instanceof MecanumDrive.DriveLocalizer) {
                     MecanumDrive.DriveLocalizer dl = (MecanumDrive.DriveLocalizer) md.localizer;
-                    leftEncs.add(dl.leftDeadWheel);
-                    leftEncs.add(dl.perpDeadWheel);
+                    leftEncs.add(dl.leftFront);
+                    leftEncs.add(dl.leftBack);
+                    rightEncs.add(dl.rightBack);
                     rightEncs.add(dl.rightFront);
-                    rightEncs.add(dl.rightDeadWheel);
                 } else if (md.localizer instanceof ThreeDeadWheelLocalizer) {
                     ThreeDeadWheelLocalizer dl = (ThreeDeadWheelLocalizer) md.localizer;
                     parEncs.add(dl.par0);

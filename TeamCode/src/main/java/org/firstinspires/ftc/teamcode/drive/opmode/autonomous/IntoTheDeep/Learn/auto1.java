@@ -18,11 +18,12 @@ public class auto1 extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(-39, -63, Math.toRadians(90)));
         Action trajectoryAction1;
 
-        trajectoryAction1 = drive.actionBuilder(drive.pose)
+        trajectoryAction1 = drive.actionBuilder(drive.localizer.getPose())
                 .strafeTo(new Vector2d(-48,-63))
                 .strafeTo(new Vector2d(63,-63))
-                .waitSeconds(0.2)
                 .build();
+
+        waitForStart();
 
         Actions.runBlocking(
                 trajectoryAction1

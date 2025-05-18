@@ -15,7 +15,7 @@ public class mainManual extends OpMode{
     DcMotorEx leftFront, rightFront, leftBack, rightBack; // Drive Motors
     DcMotorEx leftSlide, rightSlide, leftSlidePivot, rightSlidePivot; // Slide Motors
 
-    Servo leftClaw, rightClaw; // Claw Servos
+    // Servo leftClaw, rightClaw; // Claw Servos
 
     double leftSlideStartPos;
     double rightSlideStartPos;
@@ -60,8 +60,8 @@ public class mainManual extends OpMode{
         rightSlidePivot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Claw Servos
-        leftClaw = hardwareMap.get(Servo.class, "leftClaw");
-        rightClaw = hardwareMap.get(Servo.class, "rightClaw");
+        // leftClaw = hardwareMap.get(Servo.class, "leftClaw");
+        // rightClaw = hardwareMap.get(Servo.class, "rightClaw");
 
         // Set the slide motors to brake when no power is applied
         leftSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -71,7 +71,7 @@ public class mainManual extends OpMode{
 
         // TODO: Reverse Necessary Motors
         leftSlidePivot.setDirection(DcMotorSimple.Direction.REVERSE); // Reverse left pivot motor
-        leftClaw.setDirection(Servo.Direction.REVERSE);
+        //leftClaw.setDirection(Servo.Direction.REVERSE);
         leftFront.setDirection(DcMotor.Direction.REVERSE);
 
         leftSlideStartPos = leftSlide.getCurrentPosition();
@@ -110,20 +110,20 @@ public class mainManual extends OpMode{
         double movementStep = 0.01; // Step size
 
         // Variables to track current claw positions
-        double leftClawPosition = leftClaw.getPosition();
-        double rightClawPosition = rightClaw.getPosition();
-
-        if (gamepad2.right_bumper) {
-            leftClawPosition = Math.min(leftClawPosition + movementStep, openPos);
-            rightClawPosition = Math.min(rightClawPosition + movementStep, openPos);
-        }
-        else {
-            leftClawPosition = Math.max(leftClawPosition - movementStep, closedPos);
-            rightClawPosition = Math.max(rightClawPosition - movementStep, closedPos);
-        }
-
-        leftClaw.setPosition(leftClawPosition);
-        rightClaw.setPosition(rightClawPosition);
+//        double leftClawPosition = leftClaw.getPosition();
+//        double rightClawPosition = rightClaw.getPosition();
+//
+//        if (gamepad2.right_bumper) {
+//            leftClawPosition = Math.min(leftClawPosition + movementStep, openPos);
+//            rightClawPosition = Math.min(rightClawPosition + movementStep, openPos);
+//        }
+//        else {
+//            leftClawPosition = Math.max(leftClawPosition - movementStep, closedPos);
+//            rightClawPosition = Math.max(rightClawPosition - movementStep, closedPos);
+//        }
+//
+//        leftClaw.setPosition(leftClawPosition);
+//        rightClaw.setPosition(rightClawPosition);
 
         // Get stick input and reference velocity for slide control
         double stickInputR = -gamepad2.right_stick_y; // Right stick controls slides
@@ -169,8 +169,8 @@ public class mainManual extends OpMode{
         leftSlide.setPower(-vert);
         rightSlide.setPower(vert);
 
-        telemetry.addData("Left Servo Position", leftClaw.getPosition());
-        telemetry.addData("Right Servo Position", rightClaw.getPosition());
+//        telemetry.addData("Left Servo Position", leftClaw.getPosition());
+//        telemetry.addData("Right Servo Position", rightClaw.getPosition());
 
         telemetry.addData("Left Slide Position", leftSlide.getCurrentPosition());
         telemetry.addData("Right Slide Position", rightSlide.getCurrentPosition());

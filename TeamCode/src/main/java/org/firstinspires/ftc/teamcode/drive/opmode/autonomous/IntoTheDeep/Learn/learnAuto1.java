@@ -36,7 +36,7 @@ public class learnAuto1 extends LinearOpMode {
         Action trajectoryAction1; // Defining a variable called trajectoryAction
 
         // Now we get into actually building trajectories
-        trajectoryAction1 = drive.actionBuilder(drive.pose) // drive.pose is the starting position you gave the robot
+        trajectoryAction1 = drive.actionBuilder(drive.localizer.getPose()) // drive.pose is the starting position you gave the robot
                 .turn(Math.toRadians(-30))
                 .strafeTo(new Vector2d(0, 35))
                 .turn(Math.toRadians(-120))
