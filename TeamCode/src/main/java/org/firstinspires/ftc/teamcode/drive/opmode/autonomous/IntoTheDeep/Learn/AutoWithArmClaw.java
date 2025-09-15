@@ -18,7 +18,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 @Autonomous(name="BlueAuto", group="practice")
-public class AutoWithArmClaw extends LinearOpMode {
+public class  AutoWithArmClaw extends LinearOpMode {
     private boolean pathFinished = false;
 
     @Override
